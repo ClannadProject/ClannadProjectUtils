@@ -1,5 +1,6 @@
 package de.knoobie.project.clannadutils.common;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,7 +20,7 @@ public class NetUtils {
         return urlFragment.replace(" ", "%20");
     }
     
-    public static InputStream getInputStream(String url) throws MalformedURLException, IOException {
+    public static InputStream getInputStream(String url) throws MalformedURLException, IOException, FileNotFoundException {
         URLConnection connection = getURLConnection(url);
         return connection != null ? connection.getInputStream() : null;
     }
