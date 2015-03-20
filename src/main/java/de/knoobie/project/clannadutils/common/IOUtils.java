@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class IOUtils {
-    
-    public static String getString(Reader reader) throws IOException {
+
+    public static String getString(Reader reader) {
         if (reader == null) {
             return StringUtils.EMPTY;
         }
@@ -18,8 +18,21 @@ public class IOUtils {
             }
 
             return StringUtils.trim(buffer.toString());
+        } catch (IOException ex) {
+            return StringUtils.EMPTY;
         } finally {
-            reader.close();
+            close(reader);
+        }
+    }
+
+    public static void close(AutoCloseable closeAble) {
+        if (closeAble != null) {
+            try {
+                closeAble.close();
+            } catch (Exception ex) {
+                System.out.println("Couldn't close~");
+                ex.printStackTrace();
+            }
         }
     }
 
