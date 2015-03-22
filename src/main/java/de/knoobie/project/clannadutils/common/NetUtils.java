@@ -3,6 +3,7 @@ package de.knoobie.project.clannadutils.common;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,6 +24,11 @@ public class NetUtils {
     public static InputStream getInputStream(String url) throws MalformedURLException, IOException, FileNotFoundException {
         URLConnection connection = getURLConnection(url);
         return connection != null ? connection.getInputStream() : null;
+    }
+    
+    public static OutputStream getOutputStream(String url) throws MalformedURLException, IOException, FileNotFoundException {
+        URLConnection connection = getURLConnection(url);
+        return connection != null ? connection.getOutputStream(): null;
     }
 
     public static URLConnection getURLConnection(String url) throws MalformedURLException, IOException {
