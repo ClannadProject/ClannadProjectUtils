@@ -28,18 +28,18 @@ public class DateUtilsJ8 {
     }
 
     public static Date getSQLDate(String dateString, String dateFormat, Date defaultValue, boolean ignoreExceptions) {
-        return getSQLDate(dateString, dateFormat, Locale.ENGLISH, defaultValue, ignoreExceptions);
+        return getSQLDate(dateString, dateFormat, Locale.GERMANY, defaultValue, ignoreExceptions);
     }
 
-    public static Date getSQLDate(String dateString, String dateFormat, Locale locale, Date defaultValue, boolean ignoreExceptions) {
+    public static Date getSQLDate(String dateString, String dateTimeFormatPattern, Locale locale, Date defaultValue, boolean ignoreExceptions) {
         if (StringUtils.isEmpty(dateString)
-                || StringUtils.isEmpty(dateFormat)
+                || StringUtils.isEmpty(dateTimeFormatPattern)
                 || locale == null) {
             return defaultValue;
         }
-
+        
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat, locale);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormatPattern, locale);
             LocalDate date = LocalDate.parse(dateString, formatter);
             return new Date(date.toEpochDay());
 
