@@ -9,5 +9,6 @@ public interface DBService<T> {
     public DBResult remove(T args);
     public T findBy(long id);
     public T findBy(int vgmdbID);
+    public T getORadd(T arg);
     
 }
