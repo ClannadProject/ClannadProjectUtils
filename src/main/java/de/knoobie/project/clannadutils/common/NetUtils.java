@@ -15,8 +15,8 @@ import java.nio.file.StandardCopyOption;
 
 public class NetUtils {
 
-    public static final int DEFAULT_CONNECTION_TIMEOUT = 2000;
-    public static final int DEFAULT_READ_TIMEOUT = 5000;
+    public static final int DEFAULT_CONNECTION_TIMEOUT = 4000;
+    public static final int DEFAULT_READ_TIMEOUT = 10000;
 
     public static String normalizeFragment(String urlFragment) {
         if (StringUtils.isEmpty(urlFragment)) {
