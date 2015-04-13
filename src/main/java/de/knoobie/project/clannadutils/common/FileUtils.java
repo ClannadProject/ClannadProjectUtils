@@ -1,25 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.knoobie.project.clannadutils.common;
 
-import de.knoobie.project.clannadutils.common.StringUtils;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- *
- * @author cKnoobie
- */
 public class FileUtils {
 
+    public static final String[] invalidCharacters = new String[]{"\"","*","/",":","<",">","?","\\","|","-"};
+    
     public static FileSystem getFileSystem() {
         return FileSystems.getDefault();
+    }
+    
+    public static String normalizeName(String oldName){
+        if(StringUtils.isEmpty(oldName)){
+            return StringUtils.EMPTY;
+        }
+        
+        for(String s : invalidCharacters){
+           oldName = oldName.replace(s, StringUtils.EMPTY);
+        }
+        
+        return oldName;
+    }
+    
+    public static Path createDirectory(Path directory) throws IOException{
+        return Files.createDirectory(directory);
     }
 
     public static Path createSubDirectory(Path parent, String directoryName) throws IOException, IllegalArgumentException {
@@ -33,6 +42,10 @@ public class FileUtils {
             throw new IllegalArgumentException("Parent directory isn't a directory!");
         }
         return Files.createDirectory(getFileSystem().getPath(parent.toAbsolutePath().toString(), directoryName));
+    }    
+    
+    public static boolean exists(Path path) {
+        return Files.exists(path);
     }
 
     public static boolean isDirectory(Path path) {
@@ -45,5 +58,9 @@ public class FileUtils {
 
     public static boolean isSymbolicLink(Path path) {
         return Files.isSymbolicLink(path);
+    }
+
+    public static void openFileBrowser(Path path) throws IOException{
+        Desktop.getDesktop().open(path.toFile());
     }
 }
